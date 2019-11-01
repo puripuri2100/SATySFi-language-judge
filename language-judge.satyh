@@ -11,9 +11,11 @@ type language-type =
   | XSL
   | JavaScript
   | VBScript
+  | VisualBasic
   | Haskell
   | Rust
   | TypeScript
+  | Java
   | Ruby
   | R
   | Python
@@ -27,6 +29,7 @@ type language-type =
   | CPlusPlus
   | C
   | COBOL
+  | Scala
   | TOML
   | YAML
   | JSON
@@ -53,9 +56,11 @@ end = struct
     | XSL -> `XSL`
     | JavaScript -> `JavaScript`
     | VBScript -> `VBScript`
+    | VisualBasic -> `VisualBasic`
     | Haskell -> `Haskell`
     | Rust -> `Rust`
     | TypeScript -> `TypeScript`
+    | Java -> `Java`
     | Ruby -> `Ruby`
     | R -> `R`
     | Python -> `Python`
@@ -69,6 +74,7 @@ end = struct
     | CPlusPlus -> `C++`
     | C -> `C`
     | COBOL -> `COBOL`
+    | Scala -> `Scala`
     | TOML -> `TOML`
     | YAML -> `YAML`
     | JSON -> `JSON`
@@ -115,10 +121,12 @@ end = struct
     | `.xsl` -> XSL
     | `.js` -> JavaScript
     | `.vbs` -> VBScript
+    | `.vb` -> VisualBasic
     | `.hs` -> Haskell
     | `.lhs` -> Haskell
     | `.rs` -> Rust
     | `.ts` -> TypeScript
+    | `.java` -> Java
     | `.rb` -> Ruby
     | `.r` -> R
     | `.py` -> Python
@@ -133,6 +141,7 @@ end = struct
     | `.cpp` -> CPlusPlus
     | `.c` -> C
     | `.cobol` -> COBOL
+    | `.scala` -> Scala
     | `.toml` -> TOML
     | `.yml` -> YAML
     | `.json` -> JSON
