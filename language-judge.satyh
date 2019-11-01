@@ -1,0 +1,142 @@
+@require: list
+
+type language-type =
+  | Text
+  | SATySFi
+  | TeX
+  | LaTeX
+  | HTML
+  | XML
+  | CSS
+  | XSL
+  | JavaScript
+  | VBScript
+  | Haskell
+  | Rust
+  | TypeScript
+  | Ruby
+  | R
+  | Python
+  | PHP
+  | Perl
+  | Lua
+  | OCaml
+  | FSharp
+  | Go
+  | CSharp
+  | CPlusPlus
+  | C
+  | COBOL
+  | TOML
+  | YAML
+  | JSON
+  | OtherLanguage of string
+
+
+module LanguageJudge :sig
+
+  val judge : string -> language-type
+  val show : language-type -> string
+
+end = struct
+
+
+  let show lan =
+    match lan with
+    | Text -> `Text`
+    | SATySFi -> `SATySFi`
+    | TeX -> `TeX`
+    | LaTeX -> `LaTeX`
+    | HTML -> `HTML`
+    | XML -> `XML`
+    | CSS -> `CSS`
+    | XSL -> `XSL`
+    | JavaScript -> `JavaScript`
+    | VBScript -> `VBScript`
+    | Haskell -> `Haskell`
+    | Rust -> `Rust`
+    | TypeScript -> `TypeScript`
+    | Ruby -> `Ruby`
+    | R -> `R`
+    | Python -> `Python`
+    | PHP -> `PHP`
+    | Perl -> `Perl`
+    | Lua -> `Lua`
+    | OCaml -> `OCaml`
+    | FSharp -> `F#`
+    | Go -> `Go`
+    | CSharp -> `C#`
+    | CPlusPlus -> `C++`
+    | C -> `C`
+    | COBOL -> `COBOL`
+    | TOML -> `TOML`
+    | YAML -> `YAML`
+    | JSON -> `JSON`
+    | OtherLanguage(s) -> `OtherLanguage(` ^ s ^ `)`
+
+
+
+  let judge filename =
+    let extension =
+      let re-dot = regexp-of-string `\.` in
+      let lst = split-on-regexp re-dot filename in
+      let join i s1 (i2, s2) =
+        let space =
+          let-rec sub i =
+            if i == 0 then
+             ` `
+            else
+              #` `# ^ sub (i - 1)
+          in
+            sub i2
+        in
+          s1 ^ `.` ^ space ^ s2
+      in
+        match lst with
+        | [] -> ` `
+        | x :: [] -> ` `
+        | x :: xs -> List.fold-lefti join ` ` xs
+    in
+    match extension with
+    | `.txt` -> Text
+    | `.asc` -> Text
+    | `.sjis` -> Text
+    | `.saty` -> SATySFi
+    | `.satyh` -> SATySFi
+    | `.satyg` -> SATySFi
+    | `.tex` -> TeX
+    | `.ltx` -> LaTeX
+    | `.sty` -> LaTeX
+    | `.cls` -> LaTeX
+    | `.html` -> HTML
+    | `.htm` -> HTML
+    | `.xml` -> XML
+    | `.css` -> CSS
+    | `.xsl` -> XSL
+    | `.js` -> JavaScript
+    | `.vbs` -> VBScript
+    | `.hs` -> Haskell
+    | `.lhs` -> Haskell
+    | `.rs` -> Rust
+    | `.ts` -> TypeScript
+    | `.rb` -> Ruby
+    | `.r` -> R
+    | `.py` -> Python
+    | `.php` -> PHP
+    | `.pl` -> Perl
+    | `.lua` -> Lua
+    | `.ml` -> OCaml
+    | `.mli` -> OCaml
+    | `.fs` -> FSharp
+    | `.go` -> Go
+    | `.cs` -> CSharp
+    | `.cpp` -> CPlusPlus
+    | `.c` -> C
+    | `.cobol` -> COBOL
+    | `.toml` -> TOML
+    | `.yml` -> YAML
+    | `.json` -> JSON
+    | _ -> OtherLanguage(extension)
+
+
+end
